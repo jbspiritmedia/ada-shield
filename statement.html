@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility Statement</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,'Segoe UI',Arial,sans-serif;color:#1a1a1a;line-height:1.7;background:#fff;padding:40px 48px 60px;}
+a{color:var(--primary);text-decoration:underline;text-underline-offset:3px;}
+.s-header{background:var(--primary);border-radius:10px;padding:38px 38px 32px;margin-bottom:44px;position:relative;overflow:hidden;}
+.s-header::before{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none;}
+.s-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:16px;}
+.s-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0;}
+.s-header h1{font-family:Georgia,serif;font-size:28px;font-weight:700;color:#fff;margin:0 0 10px;line-height:1.2;}
+.s-header p{color:rgba(255,255,255,.75);font-size:15px;margin:0 0 22px;max-width:540px;line-height:1.65;}
+.s-meta{display:flex;flex-wrap:wrap;gap:24px;}
+.s-meta-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;}
+.s-meta-value{font-size:13px;font-weight:600;color:rgba(255,255,255,.9);display:block;margin-top:2px;}
+.s-sec{margin-bottom:42px;}
+.s-sec h2{font-family:Georgia,serif;font-size:20px;font-weight:700;color:#162240;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid rgba(30,60,138,.12);display:flex;align-items:center;gap:10px;line-height:1.3;}
+.s-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:var(--primary);color:#fff;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0;font-family:sans-serif;}
+.s-sec p{font-size:15px;line-height:1.75;margin-bottom:13px;color:#555;}
+.s-conf{background:rgba(30,60,138,.06);border:1px solid rgba(30,60,138,.18);border-left:4px solid var(--primary);border-radius:8px;padding:18px 22px;margin-bottom:18px;}
+.s-conf h3{font-size:11px;font-weight:700;color:var(--primary);letter-spacing:.05em;margin:0 0 7px;text-transform:uppercase;}
+.s-conf p{margin-bottom:0;font-size:14px;}
+.s-grid{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px;}
+.s-grid li{display:flex;align-items:flex-start;gap:9px;font-size:13px;padding:9px 13px;background:#f8f9fc;border:1px solid #e8edf5;border-radius:7px;line-height:1.5;color:#444;}
+.s-grid li::before{content:"✓";color:var(--primary);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+.s-lims{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 16px;}
+.s-lims li{display:flex;align-items:flex-start;gap:11px;font-size:13px;padding:11px 15px;background:#fffbf0;border:1px solid #fde68a;border-radius:7px;line-height:1.65;color:#555;}
+.s-lims li::before{content:"⚠";font-size:13px;flex-shrink:0;margin-top:1px;}
+.s-card{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:#f8f9fc;border:1px solid #e8edf5;border-radius:10px;margin-bottom:12px;}
+.s-card-icon{width:38px;height:38px;background:rgba(30,60,138,.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.s-card-title{font-size:13px;font-weight:700;color:#162240;margin-bottom:3px;}
+.s-badge{display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;border:1px solid #86efac;border-radius:20px;padding:2px 11px;font-size:11px;font-weight:600;color:#16a34a;margin-top:6px;}
+.s-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;}
+.s-legal{background:#f8f9fc;border:1px solid #e4e9f2;border-radius:8px;padding:15px 18px;font-size:13px;color:#666;line-height:1.7;margin-top:14px;}
+.s-seal-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:52px;padding-top:40px;border-top:1px solid #eee;text-align:center;}
+.s-seal-eye{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#bbb;}
+.s-seal-ring{width:190px;height:190px;border-radius:50%;background:white;border:4px solid var(--primary);box-shadow:0 0 0 10px rgba(30,60,138,.06),0 8px 28px rgba(30,60,138,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:16px 16px 10px;margin:0 auto;}
+.s-seal-ring::before{content:"";position:absolute;inset:10px;border-radius:50%;border:1px solid rgba(30,60,138,.15);pointer-events:none;}
+.s-seal-logo{width:120px;height:auto;display:block;margin:0 auto 6px;object-fit:contain;}
+.s-seal-div{width:65%;height:1px;background:rgba(30,60,138,.2);margin:0 auto 6px;}
+.s-seal-wcag{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:1.5px;text-align:center;display:block;line-height:1;}
+.s-seal-comp{font-size:7px;font-weight:600;color:var(--primary);letter-spacing:4px;opacity:.45;text-align:center;display:block;margin-top:3px;}
+.s-seal-cap p{font-size:12px;color:#ccc;margin:0 0 3px;}
+.s-seal-cap strong{font-size:13px;color:var(--primary);font-weight:700;}
+@media(max-width:600px){
+  body{padding:24px 20px 40px;}
+  .s-grid{grid-template-columns:1fr;}
+  .s-header{padding:24px 22px;}
+  .s-header h1{font-size:22px;}
+}
+</style>
+</head>
+<body>
+<script>
+// Read URL params — firm, email, contact_url, color, site_url, month_year
+var p = new URLSearchParams(window.location.search);
+var firm      = p.get('firm')        || 'This Firm';
+var email     = p.get('email')       || ('accessibility@' + window.location.hostname);
+var contactUrl= p.get('contact_url') || '/contact';
+var color     = p.get('color')       || '#1E3C8A';
+var siteUrl   = p.get('site_url')    || '';
+var monthYear = p.get('date')        || (function(){
+  var m=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var d=new Date(); return m[d.getMonth()]+' '+d.getFullYear();
+})();
+document.documentElement.style.setProperty('--primary', color);
+document.title = firm + ' — Accessibility Statement';
+</script>
+
+<div class="s-header">
+  <div class="s-tag">Accessibility Commitment</div>
+  <h1>Accessibility Statement</h1>
+  <p id="s-intro"></p>
+  <div class="s-meta">
+    <div><span class="s-meta-label">Standard</span><span class="s-meta-value">WCAG 2.1 Level AA</span></div>
+    <div><span class="s-meta-label">Status</span><span class="s-meta-value">Partially Conformant</span></div>
+    <div><span class="s-meta-label">Last Reviewed</span><span class="s-meta-value" id="s-date"></span></div>
+    <div><span class="s-meta-label">Response Time</span><span class="s-meta-value">Within 5 Business Days</span></div>
+  </div>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">1</span> Our Commitment</h2>
+  <p id="s-commit"></p>
+  <p>Accessibility is not a compliance exercise. It is part of how a professional website should operate — and we hold ourselves to that standard.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">2</span> Conformance Status</h2>
+  <div class="s-conf">
+    <h3>Partially Conformant — WCAG 2.1 Level AA</h3>
+    <p id="s-conform"></p>
+  </div>
+  <p>WCAG 2.1 defines how to make web content more accessible to people with disabilities, organised around four principles: perceivable, operable, understandable, and robust. Level AA is the accepted standard for ADA compliance in the United States.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">3</span> Accessibility Tools</h2>
+  <p id="s-tools"></p>
+  <ul class="s-grid">
+    <li>Text size adjustment</li><li>High contrast mode</li>
+    <li>Dark mode</li><li>Monochrome display</li>
+    <li>Dyslexia-friendly font</li><li>Increased text spacing</li>
+    <li>Increased line height</li><li>Link underline enforcement</li>
+    <li>Reading guide line</li><li>Pause all animations</li>
+    <li>Large cursor mode</li><li>Enhanced focus indicators</li>
+  </ul>
+  <p>All preferences persist across page loads. The widget also applies skip-to-content links, ARIA improvements, and alt text corrections on every page automatically.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">4</span> Technical Specifications</h2>
+  <p>This website relies on the following technologies for its accessibility implementation:</p>
+  <ul class="s-grid">
+    <li>HTML5 semantic markup</li><li>WAI-ARIA roles and attributes</li>
+    <li>CSS3 accessible colour contrast</li><li>JavaScript accessibility widget</li>
+    <li>localStorage preference persistence</li><li>Skip navigation links</li>
+  </ul>
+  <p>The ADA Shield widget operates alongside modern assistive technologies including JAWS, NVDA, VoiceOver, and TalkBack. It does not interfere with screen reader operation.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">5</span> Known Limitations</h2>
+  <p>We are transparent about areas where conformance is not yet complete:</p>
+  <ul class="s-lims">
+    <li>Some older PDF documents may lack full accessibility tagging and are being reviewed on a rolling basis.</li>
+    <li>Third-party embedded content including payment processing and booking widgets is subject to those providers' own accessibility standards.</li>
+    <li id="s-video"></li>
+  </ul>
+  <p>If you encounter a limitation not listed here, please contact us directly. User-reported issues are the fastest route to resolution.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">6</span> Feedback &amp; Contact</h2>
+  <p>If you experience accessibility barriers on any part of this website, or need content in an alternative format, contact us. We respond within five business days.</p>
+  <div class="s-card">
+    <div class="s-card-icon">✉</div>
+    <div>
+      <div class="s-card-title">Email</div>
+      <div><a id="s-email-link" href="#"></a></div>
+      <span class="s-badge">Responds within 5 business days</span>
+    </div>
+  </div>
+  <p>When reporting an issue, please include the page URL, a description of the problem, and the assistive technology you are using if applicable.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">7</span> Formal Complaints Process</h2>
+  <p>If you are not satisfied with our response, you have the right to contact the relevant enforcement body in your jurisdiction.</p>
+  <p>In the United States, complaints regarding ADA Title III digital accessibility can be directed to the <strong>U.S. Department of Justice Civil Rights Division</strong> at <a href="https://www.ada.gov" target="_blank" rel="noopener">www.ada.gov</a>.</p>
+  <p>We encourage direct contact with us first. Issues are resolved most quickly through direct dialogue.</p>
+</div>
+
+<div class="s-sec">
+  <h2><span class="s-num">8</span> Our Assessment Approach</h2>
+  <p id="s-assess"></p>
+  <ul class="s-grid">
+    <li>Self-evaluation against WCAG 2.1 AA</li><li>Automated scanning via WAVE and axe</li>
+    <li>Manual keyboard navigation testing</li><li>Screen reader compatibility checks</li>
+    <li>User feedback review and tracking</li><li>Periodic third-party audit review</li>
+  </ul>
+  <p id="s-prepared"></p>
+  <div class="s-legal" role="note"><strong>Legal Note:</strong> This accessibility statement is provided in good faith under the Americans with Disabilities Act (ADA) and applicable international accessibility law. This statement does not constitute a legal guarantee of full WCAG 2.1 AA conformance across all content and third-party integrations.</div>
+</div>
+
+<div class="s-seal-wrap">
+  <p class="s-seal-eye">Accessibility compliance verified by</p>
+  <a href="https://help-lawyer.com/ada-shield" target="_blank" rel="noopener" style="text-decoration:none;">
+    <div class="s-seal-ring">
+      <img src="https://help-lawyer.com/images/Help-Lawyer-Network-New-Logo_1.png"
+           alt="Help Lawyer" class="s-seal-logo">
+      <div class="s-seal-div"></div>
+      <span class="s-seal-wcag">WCAG 2.1 AA</span>
+      <span class="s-seal-comp">COMPLIANT</span>
+    </div>
+    <div class="s-seal-cap" style="margin-top:14px;">
+      <p>Accessibility compliance powered by</p>
+      <strong>ADA Shield &middot; Help Lawyer</strong>
+    </div>
+  </a>
+</div>
+
+<script>
+// Populate dynamic content from URL params
+document.getElementById('s-intro').textContent    = firm + ' is committed to ensuring digital accessibility for people with disabilities. We actively work to improve the user experience for everyone and apply relevant accessibility standards across our website.';
+document.getElementById('s-date').textContent     = monthYear;
+document.getElementById('s-commit').textContent   = firm + ' is committed to providing a website accessible to the widest possible audience, meeting or exceeding the requirements of the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA.';
+document.getElementById('s-conform').innerHTML    = firm + ' is <strong>partially conformant</strong> with WCAG 2.1 at Level AA. Some portions of content do not yet fully conform to the standard and we are actively working to address those areas.';
+document.getElementById('s-tools').innerHTML      = firm + ' deploys <strong>ADA Shield by Help Lawyer</strong>, a WCAG 2.1 AA compliance widget built for professional websites. The floating accessibility button — visible on every page — gives visitors direct control over 12 display and navigation adjustments.';
+document.getElementById('s-video').textContent    = 'Some video content may not yet include full captions. New content published from ' + monthYear + ' onwards will include captions as standard.';
+document.getElementById('s-assess').textContent   = firm + ' assesses the accessibility of this website through:';
+document.getElementById('s-prepared').textContent = 'This statement was prepared in ' + monthYear + ' and is reviewed at minimum annually, or following any significant changes to site structure or content.';
+var el = document.getElementById('s-email-link');
+el.href = 'mailto:' + email;
+el.textContent = email;
+</script>
+</body>
+</html>
