@@ -1,7 +1,7 @@
 /**
  * ADA Shield by Help Lawyer
  * WCAG 2.1 AA Accessibility Compliance Widget
- * Version: 1.2.6
+ * Version: 1.2.7
  * https://help-lawyer.com
  *
  * v1.0.1 fixes:
@@ -299,9 +299,10 @@
   }
 
   function buildBodyHTML() {
+    var S = 'style="' + 'color:#888;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:12px 2px 7px;display:block!important;visibility:visible!important;opacity:1!important;height:auto!important;max-height:24px!important;min-height:0!important;overflow:visible!important;padding:0!important;background:transparent!important;line-height:1.4!important;border:none!important;float:none!important;' + '"';
     return ''
       // Visual
-      + '<span class="hl-sec">Visual</span>'
+      + '<div class="hl-sec" ' + S + '>VISUAL</div>'
       + '<div class="hl-grid">'
       +   '<div class="hl-stepper">'
       +     '<span class="hl-step-lbl">Text Size</span>'
@@ -314,7 +315,7 @@
       +   makeBtn('monochrome',   '◻',  'Monochrome')
       + '</div>'
       // Reading
-      + '<span class="hl-sec">Reading</span>'
+      + '<div class="hl-sec" ' + S + '>READING</div>'
       + '<div class="hl-grid">'
       +   makeBtn('dyslexia',     'Aa', 'Dyslexia Font')
       +   makeBtn('textSpacing',  'A⇥', 'Text Spacing')
@@ -325,7 +326,7 @@
       +   '</button>'
       + '</div>'
       // Motor
-      + '<span class="hl-sec">Motor &amp; Navigation</span>'
+      + '<div class="hl-sec" ' + S + '>MOTOR &amp; NAVIGATION</div>'
       + '<div class="hl-grid">'
       +   makeBtn('pauseAnim',    '⏸', 'Pause Animations')
       +   makeBtn('largeCursor',  '↖', 'Large Cursor')
