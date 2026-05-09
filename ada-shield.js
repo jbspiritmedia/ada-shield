@@ -1,7 +1,7 @@
 /**
  * ADA Shield by Help Lawyer
  * WCAG 2.1 AA Accessibility Compliance Widget
- * Version: 1.2.5
+ * Version: 1.2.6
  * https://help-lawyer.com
  *
  * v1.0.1 fixes:
@@ -144,14 +144,14 @@
       '#hl-ada-panel #hl-ada-close:hover{background:rgba(255,255,255,.3) !important;}',
 
       // Panel body
-      '#hl-ada-panel #hl-ada-body{overflow-y:auto !important;flex:1 !important;padding:14px 12px 10px !important;box-sizing:border-box !important;}',
+      '#hl-ada-panel #hl-ada-body{overflow-y:auto !important;flex:1 !important;padding:14px 12px 10px !important;box-sizing:border-box !important;margin:0 !important;}',
 
       // Section labels
-      '#hl-ada-panel .hl-sec{font-size:9.5px !important;font-weight:700 !important;letter-spacing:.1em !important;text-transform:uppercase !important;color:#aaa !important;margin:12px 2px 7px !important;display:block !important;}',
+      '#hl-ada-panel .hl-sec{font-size:9.5px !important;font-weight:700 !important;letter-spacing:.1em !important;text-transform:uppercase !important;color:#aaa !important;margin:12px 2px 7px !important;display:block !important;visibility:visible !important;opacity:1 !important;height:auto !important;min-height:12px !important;line-height:1.4 !important;padding:0 !important;background:transparent !important;}',
       '#hl-ada-panel .hl-sec:first-child{margin-top:2px !important;}',
 
       // Grid
-      '#hl-ada-panel .hl-grid{display:grid !important;grid-template-columns:1fr 1fr !important;gap:7px !important;}',
+      '#hl-ada-panel .hl-grid{display:grid !important;grid-template-columns:1fr 1fr !important;gap:7px !important;margin:0 !important;padding:0 !important;width:100% !important;}',
 
       // Feature buttons
       '#hl-ada-panel .hl-btn{all:unset !important;display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:5px !important;padding:11px 6px !important;border-radius:9px !important;border:1.5px solid #ebebeb !important;background:#f8f8f8 !important;cursor:pointer !important;transition:all .15s !important;min-height:72px !important;text-align:center !important;position:relative !important;box-sizing:border-box !important;width:100% !important;}',
@@ -162,7 +162,7 @@
       '#hl-ada-panel .hl-btn.hl-on .hl-lbl{color:#fff !important;}',
       '#hl-ada-panel .hl-btn.hl-on::after{content:"✓" !important;position:absolute !important;top:5px !important;right:7px !important;font-size:9px !important;color:rgba(255,255,255,.7) !important;font-weight:700 !important;}',
       '#hl-ada-panel .hl-ico{font-size:19px !important;line-height:1 !important;color:' + CONFIG.primaryColor + ' !important;font-style:normal !important;font-weight:600 !important;transition:color .15s !important;}',
-      '#hl-ada-panel .hl-lbl{font-size:10.5px !important;font-weight:600 !important;color:#333 !important;line-height:1.2 !important;transition:color .15s !important;}',
+      '#hl-ada-panel .hl-lbl{font-size:10.5px !important;font-weight:600 !important;color:#333 !important;line-height:1.2 !important;transition:color .15s !important;visibility:visible !important;opacity:1 !important;display:block !important;margin:0 !important;padding:0 !important;}',
 
       // Stepper
       '#hl-ada-panel .hl-stepper{grid-column:span 2 !important;display:flex !important;align-items:center !important;justify-content:space-between !important;padding:10px 12px !important;border-radius:9px !important;border:1.5px solid #ebebeb !important;background:#f8f8f8 !important;gap:8px !important;box-sizing:border-box !important;}',
