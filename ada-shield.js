@@ -1,7 +1,7 @@
 /**
  * ADA Shield by Help Lawyer
  * WCAG 2.1 AA Accessibility Compliance Widget
- * Version: 1.2.7
+ * Version: 1.3.0
  * https://help-lawyer.com
  *
  * v1.0.1 fixes:
@@ -548,6 +548,216 @@
     });
   }
 
+  // ─── Statement Page Auto-Injector ────────────────────────────────────────
+  // Detects <div id="hl-ada-statement"> on any page and injects full statement.
+  // Works on BD, Squarespace, Webflow, or any HTML page. No server needed.
+
+  function buildStatementPage() {
+    var el = document.getElementById('hl-ada-statement');
+    if (!el) return;
+
+    var primary   = CONFIG.primaryColor;
+    var siteName  = getStatementSiteName();
+    var siteUrl   = window.location.origin;
+    var year      = new Date().getFullYear();
+    var monthYear = getStatementMonthYear();
+    var contactEmail = CONFIG.contactEmail || ('accessibility@' + window.location.hostname.replace('www.',''));
+
+    // Inject a style block for statement internals
+    if (!document.getElementById('hl-stmt-styles')) {
+      var st = document.createElement('style');
+      st.id  = 'hl-stmt-styles';
+      st.textContent = [
+        '#hl-ada-statement{font-family:-apple-system,"Segoe UI",Arial,sans-serif;color:#1a1a1a;line-height:1.7;max-width:860px;margin:0 auto;padding:0 0 60px;}',
+        '#hl-ada-statement *{box-sizing:border-box;}',
+        '.hl-s-header{background:' + primary + ';border-radius:10px;padding:36px 36px 32px;margin-bottom:40px;position:relative;overflow:hidden;}',
+        '.hl-s-header::before{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none;}',
+        '.hl-s-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:3px 13px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.88);margin-bottom:14px;}',
+        '.hl-s-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0;}',
+        '.hl-s-header h1{font-family:Georgia,"Times New Roman",serif;font-size:30px;font-weight:700;color:#fff!important;margin:0 0 10px!important;padding:0!important;border:none!important;line-height:1.2;}',
+        '.hl-s-header p{color:rgba(255,255,255,.75)!important;font-size:15px;margin:0 0 22px!important;max-width:520px;line-height:1.6;}',
+        '.hl-s-meta{display:flex;flex-wrap:wrap;gap:20px;}',
+        '.hl-s-meta-item{display:flex;flex-direction:column;gap:2px;}',
+        '.hl-s-meta-label{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.5);}',
+        '.hl-s-meta-value{font-size:13px;font-weight:600;color:rgba(255,255,255,.9);}',
+        '.hl-s-sec{margin-bottom:40px;scroll-margin-top:24px;}',
+        '.hl-s-sec h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;color:#1a1a1a!important;margin:0 0 14px!important;padding-bottom:10px!important;border-bottom:2px solid ' + primary + '22!important;display:flex;align-items:center;gap:10px;line-height:1.3;}',
+        '.hl-s-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:' + primary + ';color:#fff;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0;font-family:sans-serif;line-height:1;}',
+        '.hl-s-sec p{font-size:15px;line-height:1.75;margin-bottom:12px!important;color:#555;}',
+        '.hl-s-sec a{color:' + primary + ';text-decoration:underline;text-underline-offset:3px;}',
+        '.hl-s-conf{background:' + primary + '0d;border:1px solid ' + primary + '33;border-left:4px solid ' + primary + ';border-radius:8px;padding:18px 20px;margin-bottom:18px;}',
+        '.hl-s-conf h3{font-size:11px!important;font-weight:700!important;color:' + primary + '!important;letter-spacing:.04em;margin:0 0 6px!important;padding:0!important;text-transform:uppercase;border:none!important;}',
+        '.hl-s-conf p{margin-bottom:0!important;font-size:14px;}',
+        '.hl-s-grid{list-style:none!important;display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 0 16px!important;padding:0!important;}',
+        '.hl-s-grid li{display:flex;align-items:flex-start;gap:8px;font-size:13px;padding:8px 12px;background:#f8f8f8;border:1px solid #eee;border-radius:7px;margin:0!important;}',
+        '.hl-s-grid li::before{content:"✓";color:' + primary + ';font-weight:700;font-size:11px;flex-shrink:0;margin-top:1px;}',
+        '.hl-s-lims{list-style:none!important;display:flex;flex-direction:column;gap:8px;margin:0 0 16px!important;padding:0!important;}',
+        '.hl-s-lims li{display:flex;align-items:flex-start;gap:10px;font-size:13px;padding:10px 14px;background:#fffbf0;border:1px solid #fde68a;border-radius:7px;margin:0!important;line-height:1.6;}',
+        '.hl-s-lims li::before{content:"⚠";font-size:12px;flex-shrink:0;margin-top:2px;}',
+        '.hl-s-card{display:flex;gap:16px;align-items:flex-start;padding:16px 18px;background:#f9f9f9;border:1px solid #eee;border-radius:10px;margin-bottom:10px;}',
+        '.hl-s-card-icon{width:36px;height:36px;background:' + primary + '15;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}',
+        '.hl-s-card h3{font-size:13px!important;font-weight:700!important;margin:0 0 4px!important;padding:0!important;border:none!important;color:#1a1a1a!important;}',
+        '.hl-s-card p{margin:0!important;font-size:13px;}',
+        '.hl-s-badge{display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;border:1px solid #86efac;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:#16a34a;margin-top:6px;}',
+        '.hl-s-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;}',
+        '.hl-s-legal{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:14px 16px;font-size:13px;color:#666;line-height:1.65;margin-top:12px;}',
+        // Seal styles
+        '.hl-s-seal-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:48px;padding-top:36px;border-top:1px solid #eee;}',
+        '.hl-s-seal-eye{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#aaa;margin-bottom:4px;text-align:center;}',
+        '.hl-s-seal-link{display:inline-flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none!important;transition:opacity .2s,transform .2s;cursor:pointer;}',
+        '.hl-s-seal-link:hover{opacity:.9;transform:translateY(-2px);}',
+        '.hl-s-seal-ring{width:200px;height:200px;border-radius:50%;background:white;border:4px solid ' + primary + ';box-shadow:0 0 0 10px ' + primary + '0f,0 10px 36px ' + primary + '33;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:18px 18px 10px;filter:drop-shadow(0 6px 20px ' + primary + '33);}',
+        '.hl-s-seal-ring::before{content:"";position:absolute;inset:10px;border-radius:50%;border:1px solid ' + primary + '25;pointer-events:none;}',
+        '.hl-s-seal-logo{width:130px;height:auto;object-fit:contain;display:block;flex-shrink:0;margin-bottom:6px;}',
+        '.hl-s-seal-div{width:70%;height:1px;background:' + primary + '30;margin:0 auto 6px;flex-shrink:0;}',
+        '.hl-s-seal-wcag{font-size:12px;font-weight:800;color:' + primary + ';letter-spacing:1.5px;text-align:center;display:block;line-height:1;font-family:"Helvetica Neue",Arial,sans-serif;}',
+        '.hl-s-seal-comp{font-size:7px;font-weight:600;color:' + primary + ';letter-spacing:4px;opacity:.5;text-align:center;display:block;margin-top:3px;font-family:"Helvetica Neue",Arial,sans-serif;}',
+        '.hl-s-seal-cap{text-align:center;}',
+        '.hl-s-seal-cap p{font-size:11px;color:#bbb;margin:0;}',
+        '.hl-s-seal-cap strong{font-size:13px;color:' + primary + ';display:block;margin-top:3px;font-weight:700;}',
+        '@media(max-width:640px){.hl-s-grid{grid-template-columns:1fr;}.hl-s-header{padding:24px 20px;}.hl-s-header h1{font-size:22px;}}'
+      ].join('');
+      document.head.appendChild(st);
+    }
+
+    el.innerHTML = ''
+      // Header
+      + '<div class="hl-s-header">'
+      +   '<div class="hl-s-tag">Accessibility Commitment</div>'
+      +   '<h1>Accessibility Statement</h1>'
+      +   '<p>' + siteName + ' is committed to ensuring digital accessibility for people with disabilities. We actively work to improve the user experience for everyone and apply relevant accessibility standards across our website.</p>'
+      +   '<div class="hl-s-meta">'
+      +     '<div class="hl-s-meta-item"><span class="hl-s-meta-label">Standard</span><span class="hl-s-meta-value">WCAG 2.1 Level AA</span></div>'
+      +     '<div class="hl-s-meta-item"><span class="hl-s-meta-label">Status</span><span class="hl-s-meta-value">Partially Conformant</span></div>'
+      +     '<div class="hl-s-meta-item"><span class="hl-s-meta-label">Last Reviewed</span><span class="hl-s-meta-value">' + monthYear + '</span></div>'
+      +     '<div class="hl-s-meta-item"><span class="hl-s-meta-label">Response Time</span><span class="hl-s-meta-value">Within 5 Business Days</span></div>'
+      +   '</div>'
+      + '</div>'
+
+      // Section 1
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">1</span> Our Commitment</h2>'
+      +   '<p>' + siteName + ' is committed to providing a website accessible to the widest possible audience. We actively work to ensure our digital services meet or exceed the requirements of the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA.</p>'
+      +   '<p>Accessibility is not a compliance exercise. It is part of how a professional website should operate — and we hold ourselves to that standard.</p>'
+      + '</div>'
+
+      // Section 2
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">2</span> Conformance Status</h2>'
+      +   '<div class="hl-s-conf">'
+      +     '<h3>Partially Conformant — WCAG 2.1 Level AA</h3>'
+      +     '<p>' + siteName + ' is <strong>partially conformant</strong> with WCAG 2.1 at Level AA. Some portions of content do not yet fully conform to the standard and we are actively working to address those areas.</p>'
+      +   '</div>'
+      +   '<p>WCAG 2.1 defines how to make web content more accessible to people with disabilities, organised around four principles: perceivable, operable, understandable, and robust. Level AA is the accepted standard for ADA compliance in the United States.</p>'
+      + '</div>'
+
+      // Section 3
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">3</span> Accessibility Tools</h2>'
+      +   '<p>' + siteName + ' deploys <strong>ADA Shield by Help Lawyer</strong>, a WCAG 2.1 AA compliance widget built for professional websites. The floating accessibility button — visible on every page — gives visitors direct control over 12 display and navigation adjustments.</p>'
+      +   '<ul class="hl-s-grid">'
+      +     '<li>Text size adjustment</li><li>High contrast mode</li>'
+      +     '<li>Dark mode</li><li>Monochrome display</li>'
+      +     '<li>Dyslexia-friendly font</li><li>Increased text spacing</li>'
+      +     '<li>Increased line height</li><li>Link underline enforcement</li>'
+      +     '<li>Reading guide line</li><li>Pause all animations</li>'
+      +     '<li>Large cursor mode</li><li>Enhanced focus indicators</li>'
+      +   '</ul>'
+      +   '<p>All preferences persist across page loads. The widget also applies skip-to-content links, ARIA improvements, and alt text corrections on every page automatically.</p>'
+      + '</div>'
+
+      // Section 4
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">4</span> Technical Specifications</h2>'
+      +   '<p>This website relies on the following technologies for its accessibility implementation:</p>'
+      +   '<ul class="hl-s-grid">'
+      +     '<li>HTML5 semantic markup</li><li>WAI-ARIA roles and attributes</li>'
+      +     '<li>CSS3 accessible colour contrast</li><li>JavaScript accessibility widget</li>'
+      +     '<li>localStorage preference persistence</li><li>Skip navigation links</li>'
+      +   '</ul>'
+      +   '<p>The ADA Shield widget operates alongside modern assistive technologies including JAWS, NVDA, VoiceOver, and TalkBack. It does not interfere with screen reader operation.</p>'
+      + '</div>'
+
+      // Section 5
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">5</span> Known Limitations</h2>'
+      +   '<p>We are transparent about areas where conformance is not yet complete:</p>'
+      +   '<ul class="hl-s-lims">'
+      +     '<li>Some older PDF documents may lack full accessibility tagging. These are being reviewed and updated on a rolling basis.</li>'
+      +     '<li>Third-party embedded content including payment processing and booking widgets is subject to those providers' own accessibility standards.</li>'
+      +     '<li>Some video content may not yet include full captions. New video content published from ' + monthYear + ' onwards will include captions as standard.</li>'
+      +   '</ul>'
+      +   '<p>If you encounter a limitation not listed here, please contact us directly. User-reported issues are the fastest route to resolution.</p>'
+      + '</div>'
+
+      // Section 6
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">6</span> Feedback &amp; Contact</h2>'
+      +   '<p>If you experience accessibility barriers on any part of this website, or need content in an alternative format, contact us. We respond within five business days.</p>'
+      +   '<div class="hl-s-card">'
+      +     '<div class="hl-s-card-icon">✉</div>'
+      +     '<div><h3>Email</h3><p><a href="mailto:' + contactEmail + '">' + contactEmail + '</a></p><span class="hl-s-badge">Responds within 5 business days</span></div>'
+      +   '</div>'
+      +   '<p>When reporting an issue, please include the page URL, a description of the problem, and the assistive technology you are using if applicable.</p>'
+      + '</div>'
+
+      // Section 7
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">7</span> Formal Complaints Process</h2>'
+      +   '<p>If you are not satisfied with our response, you have the right to contact the relevant enforcement body in your jurisdiction.</p>'
+      +   '<p>In the United States, complaints regarding ADA Title III digital accessibility can be directed to the <strong>U.S. Department of Justice Civil Rights Division</strong> at <a href="https://www.ada.gov" target="_blank" rel="noopener">www.ada.gov</a>. For users in the European Union, national equality bodies in your member state handle formal complaints under the European Accessibility Act.</p>'
+      +   '<p>We encourage direct contact with us first. Issues are resolved most quickly through direct dialogue.</p>'
+      + '</div>'
+
+      // Section 8
+      + '<div class="hl-s-sec">'
+      +   '<h2><span class="hl-s-num" aria-hidden="true">8</span> Our Assessment Approach</h2>'
+      +   '<p>' + siteName + ' assesses the accessibility of this website through:</p>'
+      +   '<ul class="hl-s-grid">'
+      +     '<li>Self-evaluation against WCAG 2.1 AA</li><li>Automated scanning via WAVE and axe</li>'
+      +     '<li>Manual keyboard navigation testing</li><li>Screen reader compatibility checks</li>'
+      +     '<li>User feedback review and tracking</li><li>Periodic third-party audit review</li>'
+      +   '</ul>'
+      +   '<p>This statement was prepared in ' + monthYear + ' and is reviewed at minimum annually, or following any significant changes to site structure or content.</p>'
+      +   '<div class="hl-s-legal" role="note"><strong>Legal Note:</strong> This accessibility statement is provided in good faith under the Americans with Disabilities Act (ADA) and applicable international accessibility law. This statement does not constitute a legal guarantee of full WCAG 2.1 AA conformance across all content and third-party integrations.</div>'
+      + '</div>'
+
+      // Compliance seal
+      + '<div class="hl-s-seal-wrap">'
+      +   '<p class="hl-s-seal-eye">Accessibility compliance verified by</p>'
+      +   '<a href="' + CONFIG.brandUrl + '" class="hl-s-seal-link" target="_blank" rel="noopener" aria-label="ADA Shield compliance by Help Lawyer">'
+      +     '<div class="hl-s-seal-ring">'
+      +       '<div style="width:130px;height:auto;margin-bottom:6px;background-image:url('' + HL_LOGO_SRC + '');background-size:contain;background-repeat:no-repeat;background-position:center;min-height:90px;"></div>'
+      +       '<div class="hl-s-seal-div"></div>'
+      +       '<span class="hl-s-seal-wcag">WCAG 2.1 AA</span>'
+      +       '<span class="hl-s-seal-comp">COMPLIANT</span>'
+      +     '</div>'
+      +     '<div class="hl-s-seal-cap">'
+      +       '<p>Accessibility compliance powered by</p>'
+      +       '<strong>ADA Shield &middot; Help Lawyer</strong>'
+      +     '</div>'
+      +   '</a>'
+      + '</div>';
+  }
+
+  function getStatementSiteName() {
+    var og = document.querySelector('meta[property="og:site_name"]');
+    if (og && og.getAttribute('content')) return og.getAttribute('content');
+    var title = document.title;
+    if (title) {
+      var parts = title.split(/[|\-\u2013\u2014]/);
+      if (parts[0] && parts[0].trim()) return parts[0].trim();
+    }
+    return window.location.hostname.replace('www.','');
+  }
+
+  function getStatementMonthYear() {
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    var d = new Date();
+    return months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
   // ─── Screen reader baseline enhancements ──────────────────────────────────
   function applyBaseEnhancements() {
     // Skip link
@@ -590,6 +800,7 @@
     buildWidget();
     applyAllSaved();
     applyBaseEnhancements();
+    buildStatementPage();
   }
 
   if (document.readyState === 'loading') {
