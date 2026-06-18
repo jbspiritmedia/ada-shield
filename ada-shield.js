@@ -1,8 +1,12 @@
 /**
  * ADA Shield by Help Lawyer
  * WCAG 2.1 AA Accessibility Compliance Widget
- * Version: 1.3.2
+ * Version: 1.3.3
  * https://help-lawyer.com
+ *
+ * v1.3.3 fixes:
+ *  - Escaped apostrophe in "providers' own" string (lines 711, 935) — broke BD platform
+ *  - Fixed url() CSS background-image string quoting (line 754)
  *
  * v1.0.1 fixes:
  *  - Elementor CSS specificity conflicts resolved with scoped !important overrides
@@ -708,7 +712,7 @@
       +   '<p>We are transparent about areas where conformance is not yet complete:</p>'
       +   '<ul class="hl-s-lims">'
       +     '<li>Some older PDF documents may lack full accessibility tagging. These are being reviewed and updated on a rolling basis.</li>'
-      +     '<li>Third-party embedded content including payment processing and booking widgets is subject to those providers' own accessibility standards.</li>'
+      +     '<li>Third-party embedded content including payment processing and booking widgets is subject to those providers&#39; own accessibility standards.</li>'
       +     '<li>Some video content may not yet include full captions. New video content published from ' + monthYear + ' onwards will include captions as standard.</li>'
       +   '</ul>'
       +   '<p>If you encounter a limitation not listed here, please contact us directly. User-reported issues are the fastest route to resolution.</p>'
@@ -751,7 +755,7 @@
       +   '<p class="hl-s-seal-eye">Accessibility compliance verified by</p>'
       +   '<a href="' + CONFIG.brandUrl + '" class="hl-s-seal-link" target="_blank" rel="noopener" aria-label="ADA Shield compliance by Help Lawyer">'
       +     '<div class="hl-s-seal-ring">'
-      +       '<div style="width:130px;height:auto;margin-bottom:6px;background-image:url('' + HL_LOGO_SRC + '');background-size:contain;background-repeat:no-repeat;background-position:center;min-height:90px;"></div>'
+      +       '<div style="width:130px;height:auto;margin-bottom:6px;background-image:url(\'' + HL_LOGO_SRC + '\');background-size:contain;background-repeat:no-repeat;background-position:center;min-height:90px;"></div>'
       +       '<div class="hl-s-seal-div"></div>'
       +       '<span class="hl-s-seal-wcag">WCAG 2.1 AA</span>'
       +       '<span class="hl-s-seal-comp">COMPLIANT</span>'
@@ -932,7 +936,7 @@
         + '<div class="hl-s-sec"><h2><span class="hl-s-num">4</span> Technical Specifications</h2>'
         +   '<ul class="hl-s-grid"><li>HTML5 semantic markup</li><li>WAI-ARIA roles and attributes</li><li>CSS3 accessible colour contrast</li><li>JavaScript accessibility widget</li><li>localStorage preference persistence</li><li>Skip navigation links</li></ul></div>'
         + '<div class="hl-s-sec"><h2><span class="hl-s-num">5</span> Known Limitations</h2>'
-        +   '<ul class="hl-s-lims"><li>Some older PDF documents may lack full accessibility tagging and are being updated on a rolling basis.</li><li>Third-party embedded content is subject to those providers' own accessibility standards.</li><li>Some video content may not yet include full captions. New content from ' + mY + ' includes captions as standard.</li></ul></div>'
+        +   '<ul class="hl-s-lims"><li>Some older PDF documents may lack full accessibility tagging and are being updated on a rolling basis.</li><li>Third-party embedded content is subject to those providers&#39; own accessibility standards.</li><li>Some video content may not yet include full captions. New content from ' + mY + ' includes captions as standard.</li></ul></div>'
         + '<div class="hl-s-sec"><h2><span class="hl-s-num">6</span> Feedback &amp; Contact</h2>'
         +   '<p>If you experience accessibility barriers or need content in an alternative format, contact us. We respond within five business days.</p>'
         +   '<div class="hl-s-card"><div class="hl-s-card-icon">✉</div><div><h3>Email</h3><p><a href="mailto:' + contactEmail + '">' + contactEmail + '</a></p><span class="hl-s-badge">Within 5 business days</span></div></div></div>'
@@ -946,7 +950,7 @@
         +   '<p class="hl-s-seal-eye">Accessibility compliance verified by</p>'
         +   '<a href="' + CONFIG.brandUrl + '" class="hl-s-seal-link" target="_blank" rel="noopener">'
         +     '<div class="hl-s-seal-ring">'
-        +       '<div style="width:120px;min-height:84px;background-image:url('' + HL_LOGO_SRC + '');background-size:contain;background-repeat:no-repeat;background-position:center;margin-bottom:5px;"></div>'
+        +       '<div style="width:120px;min-height:84px;background-image:url(\'' + HL_LOGO_SRC + '\');background-size:contain;background-repeat:no-repeat;background-position:center;margin-bottom:5px;"></div>'
         +       '<div class="hl-s-seal-div"></div>'
         +       '<span class="hl-s-seal-wcag">WCAG 2.1 AA</span>'
         +       '<span class="hl-s-seal-comp">COMPLIANT</span>'
